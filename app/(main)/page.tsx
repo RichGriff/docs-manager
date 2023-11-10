@@ -3,7 +3,7 @@ import CallToAction from "@/components/CallToAction";
 import { Features } from "@/components/Features";
 import { Hero } from "@/components/Hero";
 import { LatestGuides } from "@/components/LatestGuides";
-import { LatestTech } from "@/components/LatestTech";
+import { LatestProjects } from "@/components/LatestProjects";
 import { getServerSession } from "next-auth";
 import Image from 'next/image'
 
@@ -15,7 +15,7 @@ export default async function Home() {
       <Hero />
       {/* <Announcement /> */}
       <Features />
-      <LatestTech />
+      <LatestProjects />
       <LatestGuides />
       {/* <CallToAction /> */}
     </>

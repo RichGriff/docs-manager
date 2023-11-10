@@ -30,6 +30,9 @@ export const LoggedInUser: FC<LoggedInUserProps> = ({  }) => {
         <div>
             {user ? (
                 <div className='flex justify-start items-center gap-2'>
+                    <Button variant={'ghost'} size={'icon'} onClick={() => signOut()}>
+                        <LogOut className='w-4 h-4' />
+                    </Button>
                     <div className="w-10 h-10 shadow-md text-white rounded-full p-4 bg-indigo-500 flex justify-center items-center relative overflow-hidden">
                     {user.image && (
                         <Image
@@ -40,9 +43,6 @@ export const LoggedInUser: FC<LoggedInUserProps> = ({  }) => {
                     )}
                     {user.name.substring(0, 1)}
                     </div>
-                    <Button variant={'ghost'} size={'icon'} onClick={() => signOut()}>
-                        <LogOut className='w-4 h-4' />
-                    </Button>
                 </div>
             ) : (
                 <Button onClick={() => router.push('/login')}>Login</Button>

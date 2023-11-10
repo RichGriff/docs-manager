@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
-interface LatestTechProps {
+interface LatestProjectsProps {
   
 }
 
-export const LatestTech: FC<LatestTechProps> = ({  }) => {
+export const LatestProjects: FC<LatestProjectsProps> = ({  }) => {
   return (
     <div className='bg-slate-50'>
     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto my-10">
     <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-        <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Insights</h2>
-        <p className="mt-1 text-gray-600 dark:text-gray-400">Stay in the know with insights from industry experts.</p>
+        <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Latest Projects</h2>
+        <p className="mt-1 text-gray-600 dark:text-gray-400">Keep up to date and see docs from recent projects.</p>
     </div>
 
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
