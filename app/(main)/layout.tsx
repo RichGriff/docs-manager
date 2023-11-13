@@ -7,7 +7,9 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     return (
         <>
             <Navbar />
-            {children}
+            <div className='min-h-screen'>
+                {children}
+            </div>
             <Footer />
         </>
     );
