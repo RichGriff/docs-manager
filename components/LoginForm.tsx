@@ -25,7 +25,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
+      {/* <form onSubmit={onSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
@@ -48,8 +48,8 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             Sign In with Email
           </Button>
         </div>
-      </form>
-      <div className="relative">
+      </form> */}
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
@@ -58,7 +58,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             Or continue with
           </span>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col justify-start items-center gap-2">
         <Button 
             variant="outline" 

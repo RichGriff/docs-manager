@@ -1,5 +1,6 @@
 import { Announcement } from "@/components/Announcement";
 import CallToAction from "@/components/CallToAction";
+import Contact from "@/components/Contact";
 import { Features } from "@/components/Features";
 import { Hero } from "@/components/Hero";
 import { LatestGuides } from "@/components/LatestGuides";
@@ -13,11 +14,10 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      {/* <Announcement /> */}
       <Features />
       <LatestProjects />
       <LatestGuides />
-      {/* <CallToAction /> */}
+      <Contact />
     </>
   )
 }
