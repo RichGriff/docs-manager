@@ -4,6 +4,8 @@ import Link from "next/link"
 import { MainNav } from "@/components/docs/MainNav"
 import { docsConfig } from "@/config/docs"
 import { DocsSidebarNav } from "@/components/docs/DocSidebarNav"
+import { LoggedInUser } from "@/components/LoggedInUser"
+import { Footer } from "@/components/Footer"
 // import { siteConfig } from "@/config/site"
 // import { Icons } from "@/components/icons"
 // import { DocsSearch } from "@/components/search"
@@ -24,24 +26,15 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           <div className="flex flex-1 items-center space-x-4 sm:justify-end">
             <div className="flex-1 sm:grow-0">
               {/* <DocsSearch /> */}
-              DocSearch
             </div>
             <nav className="flex space-x-4">
-              {/* <Link
-                href={'/'}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Icons.logo className="h-7 w-7" />
-                <span className="sr-only">GitHub</span>
-              </Link> */}
+              <LoggedInUser />
             </nav>
           </div>
         </div>
       </header>
       <div className="container flex-1">{children}</div>
-      {/* <SiteFooter className="border-t" /> */}
-      Footer
+      {/* <Footer /> */}
     </div>
   )
 }

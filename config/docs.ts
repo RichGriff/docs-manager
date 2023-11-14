@@ -106,6 +106,15 @@ export const docsConfig: DocsConfig = {
         },
       ]
     },
+    {
+      title: "Collections",
+        items: [
+          {
+            title: "Introduction",
+            href: "/docs/collections",
+          },
+        ]
+      },
     // {
     //   title: "Documentation",
     //   items: [
