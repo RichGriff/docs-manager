@@ -43,7 +43,7 @@ export const Navbar: FC<NavbarProps> = ({  }) => {
               </Link>
             ))}
             {session?.data?.user && (
-              <Link href={'/dashboard'} className='text-sm text-gray-700 hover:text-black'>Dashboard</Link>
+              <Link href={'/docs'} className='text-sm text-gray-700 hover:text-black'>Docs</Link>
             )}
           </div>
           <div className='flex h-10 justify-end items-center gap-6 w-1/3'>
