@@ -33,7 +33,7 @@ export const Navbar: FC<NavbarProps> = ({  }) => {
           </Link>
           </div>
           <div className='flex h-10 justify-center items-center gap-6 w-1/3'>
-            {navigation.map((item) => (
+            {/* {navigation.map((item) => (
               <Link 
                 key={item.id} 
                 href={item.url}
@@ -44,7 +44,7 @@ export const Navbar: FC<NavbarProps> = ({  }) => {
             ))}
             {session?.data?.user && (
               <Link href={'/docs'} className='text-sm text-gray-700 hover:text-black'>Docs</Link>
-            )}
+            )} */}
           </div>
           <div className='flex h-10 justify-end items-center gap-6 w-1/3'>
             {/* <Button onClick={() => router.push('/login')}>Login</Button> */}

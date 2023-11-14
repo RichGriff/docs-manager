@@ -1,15 +1,13 @@
 import { Announcement } from "@/components/Announcement";
+import { projectsConfig } from "@/config/projects";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
+import slugify from "slugify";
 
 export default async function Projects() {
   const session = await getServerSession()
 
-  const allProjectDocs = [
-    { id: 1, title: 'Project Test One', image: 'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio' },
-    { id: 2, title: 'Project Test Two', image: 'https://images.unsplash.com/photo-1682686580224-cd46ea1a6950?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio' },
-    { id: 3, title: 'Project Test Three', image: 'https://images.unsplash.com/photo-1550265486-df3659283974?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio' },
-    { id: 4, title: 'Project Test Four', image: 'https://plus.unsplash.com/premium_photo-1664358190116-6b01987a890a?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio' },
-  ]
+  const allProjectDocs = projectsConfig.projects
   
   return (
     <>
@@ -39,9 +37,11 @@ export default async function Projects() {
 }
 
 const ProjectCard = ({ project }: any) => {
+    const projectSlug = slugify(project.name, { lower: true })
+
     return (
-        <a className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
-            <div className="sm:flex">
+        <Link href={`/projects/${projectSlug}`} className="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            <div className="sm:flex justify-start items-center">
                 <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                     <img 
                         className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl" 
@@ -52,7 +52,7 @@ const ProjectCard = ({ project }: any) => {
 
                 <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
                     <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-                        {project.title}
+                        {project.name}
                     </h3>
                     <p className="mt-3 text-gray-600 dark:text-gray-400">
                         {project.description}
@@ -63,6 +63,6 @@ const ProjectCard = ({ project }: any) => {
                     </p>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }

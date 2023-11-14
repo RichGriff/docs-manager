@@ -14,15 +14,15 @@ export const authOptions = {
             tenantId: process.env.AZURE_AD_TENANT_ID,
         }),
     ],
-    callbacks: {
-        async signIn({ user, account, profile, email, credentials } : any) {
-            return true
-        },
-        async session({ session, user, token }: any) {
-            return session
-        },
-    }
+    // callbacks: {
+    //     async signIn({ user, account, profile, email, credentials } : any) {
+    //         return true
+    //     },
+    //     async session({ session, user, token }: any) {
+    //         return session
+    //     },
+    // }
 }
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

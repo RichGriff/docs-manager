@@ -1,6 +1,6 @@
-import { DocsConfig } from "@/types"
+import { ProjectConfig } from "@/types"
 
-export const docsConfig: DocsConfig = {
+export const projectsConfig: ProjectConfig = {
   mainNav: [
     {
       title: "Projects",
@@ -21,100 +21,6 @@ export const docsConfig: DocsConfig = {
         },
       ],
     },
-    {
-    title: "Components",
-      items: [
-        {
-          title: "Introduction",
-          href: "/docs/components",
-        },
-        {
-          title: "Accordion",
-          href: "/docs/components/accordion",
-        },
-        {
-          title: "Alert",
-          href: "/docs/components/alert",
-        },
-        {
-          title: "Button",
-          href: "/docs/components/button",
-        },
-        {
-          title: "Call to Action",
-          href: "/docs/components/call-to-action",
-        },
-        {
-          title: "Card List",
-          href: "/docs/components/card-list",
-        },
-        {
-          title: "Companies",
-          href: "/docs/components/companies",
-        },
-        {
-          title: "External Links",
-          href: "/docs/components/external-links",
-        },
-        {
-          title: "Features",
-          href: "/docs/components/features",
-        },
-        {
-          title: "Form",
-          href: "/docs/components/form",
-        },
-        {
-          title: "Gallery",
-          href: "/docs/components/gallery",
-        },
-        {
-          title: "Hero",
-          href: "/docs/components/hero",
-        },
-        {
-          title: "Location",
-          href: "/docs/components/location",
-        },
-        {
-          title: "Newsfeed",
-          href: "/docs/components/newsfeed",
-        },
-        {
-          title: "Page Header",
-          href: "/docs/components/page-header",
-        },
-        {
-          title: "Page List",
-          href: "/docs/components/page-list",
-        },
-        {
-          title: "Paragraph",
-          href: "/docs/components/paragraph",
-        },
-        {
-          title: "People List",
-          href: "/docs/components/people-list",
-        },
-        {
-          title: "Quick Links",
-          href: "/docs/components/quick-links",
-        },
-        {
-          title: "Useful Guides",
-          href: "/docs/components/useful-guides",
-        },
-      ]
-    },
-    {
-      title: "Collections",
-        items: [
-          {
-            title: "Introduction",
-            href: "/docs/collections",
-          },
-        ]
-      },
     // {
     //   title: "Documentation",
     //   items: [
@@ -227,4 +133,34 @@ export const docsConfig: DocsConfig = {
     //   ],
     // },
   ],
+  projects: [
+    {
+        id: 1, 
+        name: 'Pobl Group Website',
+        description: 'New group website with a fresh new look and customer portal.',
+        href: "/projects/website",
+        image: 'https://images.unsplash.com/photo-1582561971531-442566b17519?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    },
+    { 
+        id: 2, 
+        name: 'Project Test Two',
+        href: "/", 
+        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio',
+        image: 'https://images.unsplash.com/photo-1682686580224-cd46ea1a6950?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    },
+    { 
+        id: 3, 
+        name: 'Project Test Three',
+        href: "/", 
+        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio',
+        image: 'https://images.unsplash.com/photo-1550265486-df3659283974?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    },
+    { 
+        id: 4, 
+        name: 'Project Test Four',
+        href: "/", 
+        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio', 
+        image: 'https://plus.unsplash.com/premium_photo-1664358190116-6b01987a890a?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    },
+]
 }

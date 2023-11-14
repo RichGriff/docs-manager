@@ -43,6 +43,12 @@ export type DocsConfig = {
   sidebarNav: SidebarNavItem[]
 }
 
+export type ProjectConfig = {
+  mainNav: MainNavItem[]
+  sidebarNav: SidebarNavItem[]
+  projects: any[]
+}
+
 export type MarketingConfig = {
   mainNav: MainNavItem[]
 }
