@@ -1,13 +1,7 @@
 import { notFound } from "next/navigation"
 import { allDocs } from "contentlayer/generated"
 
-// import { getTableOfContents } from "@/lib/toc"
-// import { Mdx } from "@/components/mdx-components"
-// import { DocsPageHeader } from "@/components/page-header"
-// import { DocsPager } from "@/components/pager"
-// import { DashboardTableOfContents } from "@/components/toc"
-
-// import "@/styles/mdx.css"
+import "@/styles/mdx.css"
 import { DocTableOfContents } from "@/components/docs/DocTableOfContents"
 import { DocsPageHeader } from "@/components/docs/DocsPageHeader"
 import { DocsPager } from "@/components/docs/DocsPager"
