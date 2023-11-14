@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { allDocs } from "contentlayer/generated"
 
 import "@/styles/mdx.css"
@@ -7,6 +7,7 @@ import { DocsPageHeader } from "@/components/docs/DocsPageHeader"
 import { DocsPager } from "@/components/docs/DocsPager"
 import { Metadata } from "next"
 import { Mdx } from "@/components/mdx-component"
+import { getServerSession } from "next-auth"
 
 interface DocPageProps {
   params: {
@@ -76,6 +77,12 @@ export async function generateStaticParams(): Promise<
 }
 
 export default async function DocPage({ params }: DocPageProps) {
+  const session = await getServerSession()
+
+  if (!session || !session.user) {
+    redirect('/login')
+  }
+
   const doc = await getDocFromParams(params)
 
   if (!doc) {

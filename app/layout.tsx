@@ -8,7 +8,7 @@ import SessionProvider from '@/components/SessionProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Pobl Docs',
+  title: 'Documentor',
   description: 'Documentation Manager',
 }
 
