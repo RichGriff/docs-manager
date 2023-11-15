@@ -109,6 +109,46 @@ export const projectsConfig: ProjectConfig = {
           title: "What are collections?",
           href: "/projects/pobl-group-website/collections",
         },
+        {
+          title: "Campaigns",
+          href: "/projects/pobl-group-website/collections/campaigns",
+        },
+        {
+          title: "FAQs",
+          href: "/projects/pobl-group-website/collections/faqs",
+        },
+        {
+          title: "Grants",
+          href: "/projects/pobl-group-website/collections/grants",
+        },
+        {
+          title: "Pages",
+          href: "/projects/pobl-group-website/collections/pages",
+        },
+        {
+          title: "People",
+          href: "/projects/pobl-group-website/collections/people",
+        },
+        {
+          title: "Post Types",
+          href: "/projects/pobl-group-website/collections/post-types",
+        },
+        {
+          title: "Posts",
+          href: "/projects/pobl-group-website/collections/posts",
+        },
+        {
+          title: "Properties",
+          href: "/projects/pobl-group-website/collections/properties",
+        },
+        {
+          title: "Student Rooms",
+          href: "/projects/pobl-group-website/collections/student-rooms",
+        },
+        {
+          title: "Useful Guides",
+          href: "/projects/pobl-group-website/collections/useful-guides",
+        },
       ]
     },
   ],

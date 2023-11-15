@@ -3,4 +3,54 @@ title: Collections
 description: These are custom records of data that we can retreive from the cms.
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et sollicitudin ac.
+Collections are a key part of the Headless CMS (Strapi), they hold all the data that we need to be sent to the website. 
+Some collections are essential to the structure of the website, these are:
+
+- Pages
+- Posts
+
+Others are more focused on content for certain parts of the business.
+
+#### How does this work?
+
+1. From the website we make a request to the Strapi site. 
+2. For example we want to grab all pages, we would use the following url:
+`https://poblwebsite-cms-staging.azurewebsites.net/api/pages`
+3. This will return json data for us to render the page. For example:
+
+```json
+{
+    "data": [
+        {
+            "id": 2,
+            "attributes": {
+                "title": "About",
+                "description": null,
+                "slug": "about",
+                "full_slug": "about",
+                "createdAt": "2023-07-02T16:33:51.441Z",
+                "updatedAt": "2023-10-27T11:19:36.888Z",
+                "locale": "en",
+                "keywords": null,
+                "display_title": "about"
+            }
+        },
+        {
+            "id": 3,
+            "attributes": {
+                "title": "Careers",
+                "description": null,
+                "slug": "careers",
+                "full_slug": "careers",
+                "createdAt": "2023-07-02T16:39:07.031Z",
+                "updatedAt": "2023-11-03T10:29:13.257Z",
+                "locale": "en",
+                "keywords": null,
+                "display_title": "Careers"
+            }
+        },
+    ]
+}
+```
+
+The above is just a small example of the data, we in fact return a lot more including the content of the page. 
