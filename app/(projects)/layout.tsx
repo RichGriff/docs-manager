@@ -6,6 +6,9 @@ import { DocsSidebarNav } from "@/components/docs/DocSidebarNav"
 import { LoggedInUser } from "@/components/LoggedInUser"
 import { Footer } from "@/components/Footer"
 import { projectsConfig } from "@/config/projects"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 // import { siteConfig } from "@/config/site"
 // import { Icons } from "@/components/icons"
 // import { DocsSearch } from "@/components/search"
@@ -15,7 +18,13 @@ interface DocsLayoutProps {
   children: React.ReactNode
 }
 
-export default function DocsLayout({ children }: DocsLayoutProps) {
+export default async function DocsLayout({ children }: DocsLayoutProps) {
+  const session = await getServerSession()
+
+  if (!session || !session.user) {
+    redirect('/login')
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -29,6 +38,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
             </div>
             <nav className="flex space-x-4">
               <LoggedInUser />
+              <ThemeToggle />
             </nav>
           </div>
         </div>

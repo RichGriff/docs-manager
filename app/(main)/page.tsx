@@ -14,9 +14,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <Features />
       <LatestProjects />
-      <LatestGuides />
       <Contact />
     </>
   )

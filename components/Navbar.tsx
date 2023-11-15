@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { LoggedInUser } from './LoggedInUser'
 import { Icons } from './Icons'
 import { useSession } from 'next-auth/react'
+import { ThemeToggle } from './ThemeToggle'
+import { useTheme } from 'next-themes'
 
 interface NavbarProps {
   
@@ -19,6 +21,7 @@ const navigation = [
 
 export const Navbar: FC<NavbarProps> = ({  }) => {
   const session = useSession()
+  const { theme } = useTheme()
 
   return (
     <div className="border-b ">
@@ -26,7 +29,7 @@ export const Navbar: FC<NavbarProps> = ({  }) => {
         <div className='w-full mx-6 flex justify-evenly'>
           <div className='flex h-10 justify-start items-center gap-6 w-1/3'>
           <Link href="/" className="hidden items-center space-x-2 md:flex">
-            <Icons.logo />
+            {theme === 'dark' ? <Icons.logo className='w-8 h-8' /> : <Icons.logo className='w-8 h-8' />}
             <span className="hidden font-bold sm:inline-block">
               Documentor
             </span>
@@ -47,8 +50,8 @@ export const Navbar: FC<NavbarProps> = ({  }) => {
             )} */}
           </div>
           <div className='flex h-10 justify-end items-center gap-6 w-1/3'>
-            {/* <Button onClick={() => router.push('/login')}>Login</Button> */}
             <LoggedInUser />
+            <ThemeToggle />
           </div>
         </div>
       </div>

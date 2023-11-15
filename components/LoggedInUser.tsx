@@ -45,7 +45,7 @@ export const LoggedInUser: FC<LoggedInUserProps> = ({  }) => {
                     </div>
                 </div>
             ) : (
-                <Button onClick={() => router.push('/login')} className='bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border'>Login</Button>
+                <Button onClick={() => router.push('/login')} className='bg-gradient-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border dark:text-white'>Login</Button>
             )}
         </div>
     )

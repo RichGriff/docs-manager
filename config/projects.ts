@@ -6,10 +6,6 @@ export const projectsConfig: ProjectConfig = {
       title: "Projects",
       href: "/projects",
     },
-    {
-      title: "Docs",
-      href: "/docs",
-    },
   ],
   sidebarNav: [
     {
@@ -25,7 +21,7 @@ export const projectsConfig: ProjectConfig = {
     title: "Components",
       items: [
         {
-          title: "Introduction",
+          title: "What are components?",
           href: "/projects/pobl-group-website/components",
         },
         {
@@ -110,7 +106,7 @@ export const projectsConfig: ProjectConfig = {
     title: "Collections",
       items: [
         {
-          title: "Introduction",
+          title: "What are collections?",
           href: "/projects/pobl-group-website/collections",
         },
       ]
@@ -121,7 +117,7 @@ export const projectsConfig: ProjectConfig = {
         id: 1, 
         name: 'Pobl Group Website',
         description: 'New group website with a fresh new look and customer portal.',
-        href: "/projects/website",
+        href: "/projects/pobl-group-website",
         image: 'https://images.unsplash.com/photo-1582561971531-442566b17519?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
     },
     { 

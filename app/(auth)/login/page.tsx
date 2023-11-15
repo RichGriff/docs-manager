@@ -24,7 +24,7 @@ export default function AuthenticationPage() {
           Login
         </Link> */}
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="absolute inset-0 bg-foreground dark:bg-background" />
           <Link href={'/'} className="relative z-20 flex items-center text-lg font-medium group">
             <MoveLeft className="w-4 h-4 mr-3 group-hover:-translate-x-1 transition-all" />
             Back

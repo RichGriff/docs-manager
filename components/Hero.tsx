@@ -13,13 +13,15 @@ export const Hero: FC<HeroProps> = async ({  }) => {
     const session = await getServerSession()
 
     return (
-        <div className='bg-slate-50'>
+        <div className='bg-slate-50 dark:bg-slate-900/30'>
             <div className="max-w-[85rem] mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
                     <div className="lg:col-span-3">
-                    <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">Build Better Products</h1>
+                    <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-5xl dark:text-white">
+                        Cultivate Success with Seamless Documentation
+                    </h1>
                     <p className="mt-3 text-lg text-gray-800 dark:text-gray-400">
-                        Manage your documentation for all your projects faster and better - with all the information at your fingertips.
+                        Empowering Your Business Through Insightful Project Documentation for Every Development Triumph.
                     </p>
 
                     <div className="mt-8 flex justify-start">
