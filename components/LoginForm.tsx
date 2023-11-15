@@ -65,7 +65,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             type="button" 
             disabled={isLoading} 
             className="w-full"
-            onClick={() => signIn('github', { callbackUrl: 'http://localhost:3000/dashboard' })}
+            onClick={() => signIn('github', { callbackUrl: process.env.NEXT_PUBLIC_SITE_URL })}
         >
             {isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -79,7 +79,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             type="button" 
             disabled={isLoading} 
             className="w-full"
-            onClick={() => signIn('azure-ad', { callbackUrl: 'http://localhost:3000/dashboard' })}
+            onClick={() => signIn('azure-ad', { callbackUrl: process.env.NEXT_PUBLIC_SITE_URL })}
         >
             {isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
