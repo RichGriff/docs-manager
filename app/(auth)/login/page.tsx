@@ -5,6 +5,7 @@ import { MoveLeft } from 'lucide-react'
 
 import { cn } from "@/lib/utils"
 import { LoginForm } from "@/components/LoginForm"
+import { Icons } from "@/components/Icons"
 
 export const metadata: Metadata = {
   title: "Login Form",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative min-h-screen py-32 md:py-0 flex-col justify-center items-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         {/* <Link
           href="/examples/authentication"
           className={cn(
@@ -40,9 +41,13 @@ export default function AuthenticationPage() {
             </blockquote>
           </div>
         </div>
+
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
+              <div className="flex justify-center items-center mb-6">
+                <Icons.logo className="w-12 h-12" />
+              </div>
               <h1 className="text-2xl font-semibold tracking-tight">
                 Sign In
               </h1>
