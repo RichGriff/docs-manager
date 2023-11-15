@@ -97,7 +97,7 @@ export default async function DocPage({ params }: DocPageProps) {
         <DocsPageHeader heading={doc.title} text={doc.description} />
         <Mdx code={doc.body.code} />
         <hr className="my-4 md:my-6" />
-        {/* <DocsPager doc={doc} /> */}
+        <DocsPager doc={doc} />
       </div>
       <div className="hidden text-sm xl:block">
         <div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">

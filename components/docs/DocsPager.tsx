@@ -1,13 +1,14 @@
 import Link from "next/link"
-import { Doc } from "contentlayer/generated"
+import { Project } from "contentlayer/generated"
 
 import { docsConfig } from "@/config/docs"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { projectsConfig } from "@/config/projects"
 
 interface DocsPagerProps {
-  doc: Doc
+  doc: Project
 }
 
 export function DocsPager({ doc }: DocsPagerProps) {
@@ -41,8 +42,8 @@ export function DocsPager({ doc }: DocsPagerProps) {
   )
 }
 
-export function getPagerForDoc(doc: Doc) {
-  const flattenedLinks = [null, ...flatten(docsConfig.sidebarNav), null]
+export function getPagerForDoc(doc: Project) {
+  const flattenedLinks = [null, ...flatten(projectsConfig.sidebarNav), null]
   const activeIndex = flattenedLinks.findIndex(
     (link) => doc.slug === link?.href
   )
@@ -57,6 +58,7 @@ export function getPagerForDoc(doc: Doc) {
   }
 }
 
+//@ts-ignore
 export function flatten(links: { items? }[]) {
   return links.reduce((flat, link) => {
     return flat.concat(link.items ? flatten(link.items) : link)

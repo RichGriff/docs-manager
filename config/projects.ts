@@ -17,121 +17,104 @@ export const projectsConfig: ProjectConfig = {
       items: [
         {
           title: "About",
-          href: "/docs",
+          href: "/projects/pobl-group-website",
         },
       ],
     },
-    // {
-    //   title: "Documentation",
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       href: "/docs/documentation",
-    //     },
-    //     {
-    //       title: "Contentlayer",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Components",
-    //       href: "/docs/documentation/components",
-    //     },
-    //     {
-    //       title: "Code Blocks",
-    //       href: "/docs/documentation/code-blocks",
-    //     },
-    //     {
-    //       title: "Style Guide",
-    //       href: "/docs/documentation/style-guide",
-    //     },
-    //     {
-    //       title: "Search",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Blog",
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Build your own",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Writing Posts",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Dashboard",
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Layouts",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Server Components",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Authentication",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Database with Prisma",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "API Routes",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Marketing Site",
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "File Structure",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Tailwind CSS",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //     {
-    //       title: "Typography",
-    //       href: "/docs/in-progress",
-    //       disabled: true,
-    //     },
-    //   ],
-    // },
+    {
+    title: "Components",
+      items: [
+        {
+          title: "Introduction",
+          href: "/projects/pobl-group-website/components",
+        },
+        {
+          title: "Accordion",
+          href: "/projects/pobl-group-website/components/accordion",
+        },
+        {
+          title: "Alert",
+          href: "/projects/pobl-group-website/components/alert",
+        },
+        {
+          title: "Button",
+          href: "/projects/pobl-group-website/components/button",
+        },
+        {
+          title: "Call to Action",
+          href: "/projects/pobl-group-website/components/call-to-action",
+        },
+        {
+          title: "Card List",
+          href: "/projects/pobl-group-website/components/card-list",
+        },
+        {
+          title: "Companies",
+          href: "/projects/pobl-group-website/components/companies",
+        },
+        {
+          title: "External Links",
+          href: "/projects/pobl-group-website/components/external-links",
+        },
+        {
+          title: "Features",
+          href: "/projects/pobl-group-website/components/features",
+        },
+        {
+          title: "Form",
+          href: "/projects/pobl-group-website/components/form",
+        },
+        {
+          title: "Gallery",
+          href: "/projects/pobl-group-website/components/gallery",
+        },
+        {
+          title: "Hero",
+          href: "/projects/pobl-group-website/components/hero",
+        },
+        {
+          title: "Location",
+          href: "/projects/pobl-group-website/components/location",
+        },
+        {
+          title: "Newsfeed",
+          href: "/projects/pobl-group-website/components/newsfeed",
+        },
+        {
+          title: "Page Header",
+          href: "/projects/pobl-group-website/components/page-header",
+        },
+        {
+          title: "Page List",
+          href: "/projects/pobl-group-website/components/page-list",
+        },
+        {
+          title: "Paragraph",
+          href: "/projects/pobl-group-website/components/paragraph",
+        },
+        {
+          title: "People List",
+          href: "/projects/pobl-group-website/components/people-list",
+        },
+        {
+          title: "Quick Links",
+          href: "/projects/pobl-group-website/components/quick-links",
+        },
+        {
+          title: "Useful Guides",
+          href: "/projects/pobl-group-website/components/useful-guides",
+        },
+      ]
+    },
+    {
+    title: "Collections",
+      items: [
+        {
+          title: "Introduction",
+          href: "/projects/pobl-group-website/collections",
+        },
+      ]
+    },
   ],
   projects: [
     {
