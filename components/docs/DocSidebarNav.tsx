@@ -5,17 +5,31 @@ import { usePathname } from "next/navigation"
 
 import { SidebarNavItem } from "@/types"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
+import { projectsConfig } from "@/config/projects"
 
 export interface DocsSidebarNavProps {
-  items: SidebarNavItem[]
+  // items: SidebarNavItem[]
 }
 
-export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
-  const pathname = usePathname()
+export function DocsSidebarNav({  }: DocsSidebarNavProps) {
+    const [items, setItems] = useState<any>([])
+    const pathname = usePathname()
+
+    useEffect(() => {
+      const root = (pathname.replace('/', '').split('/').length == 1)
+
+      if(!root) {
+          const project = projectsConfig.projects.filter(p => p.href === pathname)[0]
+          setItems(project.sidebarNav)
+      }
+  },[])
+
 
   return items.length ? (
     <div className="w-full">
-      {items.map((item, index) => (
+      {items.map((item: any, index: any) => {
+        return (
         <div key={index} className={cn("pb-8")}>
           <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-medium">
             {item.title}
@@ -23,8 +37,8 @@ export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
           {item.items ? (
             <DocsSidebarNavItems items={item.items} pathname={pathname} />
           ) : null}
-        </div>
-      ))}
+        </div>)
+      })}
     </div>
   ) : null
 }

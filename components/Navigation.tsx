@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MainNav } from './docs/MainNav'
 import { DocsSidebarNav } from './docs/DocSidebarNav'
 import { projectsConfig } from '@/config/projects'
@@ -11,7 +11,7 @@ const Navigation = () => {
 
     return (
         <MainNav items={projectsConfig.mainNav}>
-            {!root ? <DocsSidebarNav items={projectsConfig.sidebarNav} /> : null }
+            {!root ? <DocsSidebarNav /> : null }
         </MainNav>
     )
 }
