@@ -2,9 +2,9 @@
 
 import * as React from "react"
 
-// import { TableOfContents } from "@/lib/toc"
+import { TableOfContents } from "@/lib/toc"
 import { cn } from "@/lib/utils"
-// import { useMounted } from "@/hooks/use-mounted"
+import { useMounted } from "@/hooks/use-mounted"
 
 interface TocProps {
   toc: any
@@ -23,18 +23,18 @@ export function DocTableOfContents({ toc }: TocProps) {
     [toc]
   )
   const activeHeading = useActiveItem(itemIds)
-//   const mounted = useMounted()
+  const mounted = useMounted()
 
   if (!toc?.items) {
     return null
   }
 
-//   return mounted ? (
-//     <div className="space-y-2">
-//       <p className="font-medium">On This Page</p>
-//       <Tree tree={toc} activeItem={activeHeading} />
-//     </div>
-//   ) : null
+  return mounted ? (
+    <div className="space-y-2">
+      <p className="font-medium">On This Page</p>
+      <Tree tree={toc} activeItem={activeHeading} />
+    </div>
+  ) : null
 }
 
 function useActiveItem(itemIds: (string | undefined)[]) {
@@ -81,8 +81,7 @@ function useActiveItem(itemIds: (string | undefined)[]) {
 }
 
 interface TreeProps {
-//   tree: TableOfContents
-  tree: any
+  tree: TableOfContents
   level?: number
   activeItem?: string | null
 }
