@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { Project } from "contentlayer/generated"
 
@@ -6,13 +8,29 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { projectsConfig } from "@/config/projects"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 interface DocsPagerProps {
   doc: Project
 }
 
 export function DocsPager({ doc }: DocsPagerProps) {
-  const pager = getPagerForDoc(doc)
+  const [navItems, setNavItems] = useState<any>([])
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const root = (pathname.replace('/', '').split('/').length == 1)
+
+    if(!root) {
+      console.log('PATH', pathname)
+      let slug = pathname.replace('/', '').split('/')[1]
+      const project = projectsConfig.projects.filter(p => p.slug === slug)[0]
+      setNavItems(project.sidebarNav)
+    }
+  },[])
+
+  const pager = getPagerForDoc(doc, navItems)
 
   if (!pager) {
     return null
@@ -42,8 +60,8 @@ export function DocsPager({ doc }: DocsPagerProps) {
   )
 }
 
-export function getPagerForDoc(doc: Project) {
-  const flattenedLinks = [null, ...flatten(projectsConfig.sidebarNav), null]
+export function getPagerForDoc(doc: Project, navItems: any) {
+  const flattenedLinks = [null, ...flatten(navItems), null]
   const activeIndex = flattenedLinks.findIndex(
     (link) => doc.slug === link?.href
   )

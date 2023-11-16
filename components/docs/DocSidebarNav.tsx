@@ -20,11 +20,12 @@ export function DocsSidebarNav({  }: DocsSidebarNavProps) {
       const root = (pathname.replace('/', '').split('/').length == 1)
 
       if(!root) {
-          const project = projectsConfig.projects.filter(p => p.href === pathname)[0]
+          console.log('PATH', pathname)
+          let slug = pathname.replace('/', '').split('/')[1]
+          const project = projectsConfig.projects.filter(p => p.slug === slug)[0]
           setItems(project.sidebarNav)
       }
-  },[])
-
+    },[])
 
   return items.length ? (
     <div className="w-full">

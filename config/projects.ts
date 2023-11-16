@@ -156,6 +156,7 @@ export const projectsConfig: ProjectConfig = {
     {
         id: 1, 
         name: 'Pobl Group Website',
+        slug: 'pobl-group-website',
         description: 'New group website with a fresh new look and customer portal.',
         href: "/projects/pobl-group-website",
         image: 'https://images.unsplash.com/photo-1582561971531-442566b17519?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
