@@ -1,0 +1,187 @@
+---
+title: Cases
+description: Available actions to this route.
+---
+
+## Description
+These routes allows authenticated users fetch and update case (enquiries) details.
+
+## Contents
+
+- [Get Cases](#get-cases)
+- [New General Enquiry](#new-general-enquiry-case)
+- [New Complaint](#new-complaint-case)
+- [New Compliment](#new-compliment-case)
+- [Case Options](#get-case-options)
+
+## Base URL
+http://localhost:5000/api/cases
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### Get Cases
+- Method: GET
+- Endpoint: `${baseUrl}?id={accountId}`
+- Description: Retrieves open cases from Dynamics for the given account Id.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+[
+    {
+        "id": "e1122da8-bb48-ee11-be6f-0022481b5a02",
+        "contactId": "22bf5e7a-f1c7-ed11-b597-0022481b5210",
+        "accountId": "af984368-e355-ed11-9562-0022481b5dc1",
+        "ref": "C-1366",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "reportedDate": "2023-09-01",
+        "caseType": "Complaint",
+        "color": "red"
+    },
+    ...
+]
+```
+
+### New General Enquiry Case
+- Method: POST
+- Endpoint: `${baseUrl}'/generalenquiry`
+- Description: Create a new general enquiry case
+- Authentication Required: Yes
+
+#### Request
+```json
+{
+    "subject":"Test",
+    "detail":"Testing 123",
+    "reportedDate":"2023-11-06",
+    "accountId":"af984368-e355-ed11-9562-0022481b5dc1",
+    "contactId":"22bf5e7a-f1c7-ed11-b597-0022481b5210"
+}
+```
+#### Responses
+201 Response
+```json
+{
+    "message": "New General Enquiry Added"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+
+### New Complaint Case
+- Method: POST
+- Endpoint: `${baseUrl}'/complaint`
+- Description: Create a new complaint case
+- Authentication Required: Yes
+
+#### Request
+```json
+{
+    "detail": "I have a complaint",
+    "type": "",
+    "reportedDate":"2023-11-06",
+    "accountId":"af984368-e355-ed11-9562-0022481b5dc1",
+    "contactId":"22bf5e7a-f1c7-ed11-b597-0022481b5210"
+}
+```
+201 Response
+```json
+{
+    "message": "Successfully created complaint"
+}
+```
+
+404 Response
+```json
+{
+    "error": "Could not create complaint"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+### New Compliment Case
+- Method: POST
+- Endpoint: `${baseUrl}'/compliment`
+- Description: Create a new compliment case
+- Authentication Required: Yes
+
+#### Request
+```json
+{
+    "category": "771570008",
+    "categoryOther": "Some reason that I dont know right now...",
+    "detail": "Testing from Customer Portal API",
+    "reportedDate": "2023-01-19",
+    "accountId": "adb42a18-c4ee-eb11-94ef-000d3a8745fa"
+}
+```
+201 Response
+```json
+{
+    "message": "New Compliment Added"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+### Get Case Options
+- Method: GET
+- Endpoint: `${baseUrl}'/options?form={form}`
+- Description: Fetch a list of available options for the specified form.
+- Authentication Required: No
+
+#### Requests
+Available forms:
+- Complaint - `/options?form=complaint`
+- Compliment - `/options?form=compliment`
+
+#### Responses
+
+200 Response
+```json
+[
+    {
+        "value": 771570000,
+        "label": "Pobl Customer"
+    },
+    {
+        "value": 771570001,
+        "label": "Former Customer"
+    },
+    {
+        "value": 771570002,
+        "label": "External"
+    }
+]
+```
+
+404 Response
+```json
+{
+    "error": "No form provided"
+}
+```

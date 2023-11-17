@@ -308,24 +308,72 @@ export const projectsConfig: ProjectConfig = {
     },
     { 
         id: 2, 
-        name: 'Project Test Two',
-        href: "/", 
-        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio',
+        name: 'Customer Portal API',
+        slug: 'customer-portal',
+        href: "/projects/customer-portal", 
+        description: 'Customer portal API allowing the communication between website and crm system.',
         image: 'https://images.unsplash.com/photo-1682686580224-cd46ea1a6950?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
-    },
-    { 
-        id: 3, 
-        name: 'Project Test Three',
-        href: "/", 
-        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio',
-        image: 'https://images.unsplash.com/photo-1550265486-df3659283974?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
-    },
-    { 
-        id: 4, 
-        name: 'Project Test Four',
-        href: "/", 
-        description: 'Produce professional, reliable streams easily leveraging Preline\'s innovative broadcast studio', 
-        image: 'https://plus.unsplash.com/premium_photo-1664358190116-6b01987a890a?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+        sidebarNav: [
+          {
+            title: "Introduction",
+            items: [
+              {
+                title: "About",
+                href: "/projects/customer-portal",
+              },
+            ],
+          },
+          {
+          title: "Endpoints",
+            items: [
+              {
+                title: "Accounts",
+                href: "/projects/customer-portal/endpoints/account",
+              },
+              {
+                title: "Cases",
+                href: "/projects/customer-portal/endpoints/cases",
+              },
+              {
+                title: "Contacts",
+                href: "/projects/customer-portal/endpoints/contacts",
+              },
+              {
+                title: "Occupancies",
+                href: "/projects/customer-portal/endpoints/occupancies",
+              },
+              {
+                title: "Properties",
+                href: "/projects/customer-portal/endpoints/properties",
+              },
+              {
+                title: "Repairs",
+                href: "/projects/customer-portal/endpoints/repairs",
+              },
+              {
+                title: "Users",
+                href: "/projects/customer-portal/endpoints/users",
+              }
+            ]
+          },
+          {
+            title: "Other",
+            items: [
+              {
+                title: "Authentication",
+                href: "/projects/customer-portal/authentication",
+              },
+              {
+                title: "Dynamics",
+                href: "/projects/customer-portal/dynamics",
+              },
+              {
+                title: "Emailing",
+                href: "/projects/customer-portal/emailing",
+              },
+            ],
+          },
+        ],
     },
 ]
 }

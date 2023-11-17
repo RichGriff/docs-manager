@@ -1,0 +1,124 @@
+---
+title: Dynamics Integration
+description: Connecting to Dynamics CRM system.
+---
+
+Our customer portal API integrates with our customer data help in our Microsoft Dynamics environments. This document explains how we connect the two and create/update/retrieve data from that system.
+
+## Get Started
+
+In order to get started with integrating into Dynamics, you need to create an `Application User` - this user will be the account that the API runs as when getting data. However, this is not a normal `user` account. Instead we use an `App Registration` in <b>Azure</b>.
+
+## 📐 Configuration
+
+### App Registrations
+
+Creating App Regisrations allow us to connect to multiple Dynamics applications with a `client Id` and `client secret`. This allows for a more secure connection rather than using email and password credentials.
+
+For this API we are using an app called `CustomerPortal`.
+
+The credentials required for this app can be found in Azure under:
+`Microsoft Entra ID > App Regisrations > CustomerPortal > Certificates & secrets`
+
+### API Permissions
+
+When setting up the App, you will need to select what permissions you want to give it. By default, you will have access to the Microsoft Graph. In this case we have added `Dynamics CRM`.
+
+### Application Users
+
+In order to get the app fully connected to `Dynamics CRM`, you will need to add the App as and Application User to each environment. 
+
+You can do this by following these steps:
+
+- Visit [Admin Center](https://admin.powerplatform.microsoft.com/home) in PowerApps
+- Select Environments
+- Select the environment you want
+- Navigate to `Settings > Users + Permissions > Application Users`
+- Select `+ New app user`
+- Follow the instructions to add your app and provide its Client ID and select the security role you wish to use.
+
+## 🖥️ Coding
+
+Once the configuration is in place you can then connect your API to your environment(s) with this App. 
+
+### Token
+
+In order to make requests to the Dynamics API we need to get a valid token, this will authenticate the request and allow us to successfully get data. 
+
+We use the below function to get a token for Dynamics:
+
+```js
+async function GetDynamicsToken() {
+  let tokenData = null;
+  var data = qs.stringify({
+    client_id: process.env.DYNAMICS_CLIENT_ID,
+    client_secret: process.env.DYNAMICS_CLIENT_SECRET,
+    grant_type: "client_credentials",
+    resource: `https://${process.env.DYNAMICS_ENV}.crm11.dynamics.com`,
+  });
+  var config = {
+    method: "get",
+    url: "https://login.microsoftonline.com/5f0d9160-6b93-41c6-8db2-153e0d7f7960/oauth2/token",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Cookie:
+        "fpc=Ao6FWL31ryRKh_UqGTpFn-uxuI2VAQAAAJr5NtkOAAAA; stsservicecookie=estsfd; x-ms-gateway-slice=estsfd",
+    },
+    data: data,
+  };
+
+  await axios(config)
+    .then(function (response) {
+      // console.log(JSON.stringify(response.data));
+      tokenData = response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return tokenData;
+}
+```
+
+### Making Requests
+
+We make this request to get a valid token every time we want to connect to the Dynamics API, as we are required to provide this token in our request. 
+
+```js
+const { access_token } = await GetDynamicsToken()
+const { email, password } = req.body
+const user = await GetUserByEmail(access_token, email)
+```
+```js
+const GetUserByEmail = async (token, email) => {
+    // token = access_token
+    const fields = ['pobl_portaluserid','pobl_name','pobl_email', 'pobl_username', 'pobl_password', '_pobl_contact_value', '_pobl_account_value', 'pobl_verified']
+    let data = []
+
+    var config = {
+        method: "get",
+        url: `https://${process.env.DYNAMICS_ENV}.api.crm11.dynamics.com/api/data/v9.2/pobl_portalusers?$select=${fields.join(',')}&$filter=pobl_email eq '${email}'`,
+        headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        },
+    };
+
+    await axios(config)
+        .then(function (response) {
+            data = response.data.value;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    return data;
+}
+```
+
+## Secure Credentials
+
+It's very important to keep your `Client Id and Secret` set in your environment variables, ensuring that you recreate this variables on your hosting platform also. 
+
+

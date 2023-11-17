@@ -1,0 +1,151 @@
+---
+title: Occupancies
+description: Available actions to this route.
+---
+
+## Description
+These routes allows authenticated users fetch occupancy details.
+## Contents
+
+- [Get Occupancies](#get-occupancies)
+- [Get Single Occupancy](#get-single-occupancy)
+- [Get Transactions](#get-transactions)
+
+## Base URL
+http://localhost:5000/api/occupancies
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### Get Occupancies
+- Method: GET
+- Endpoint: `${baseUrl}?id={accountId}`
+- Description: Returns a list of current and former occupancies for the provided account Id.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+[
+    {
+        "@odata.etag": "W/\"646129425\"",
+        "pobl_occupancycontractreference": "ACC-0000000/1",
+        "pobl_occupancycontractid": "00000000-0000-0000-0000-000000000000",
+        "pobl_name": "ACC-0000000/1",
+        "pobl_occupantcontractstartdate": "2001-01-01T00:00:00Z",
+        "prop.pobl_addressconcat": "01 Test Cl, Debug Road, Swansea, TE5 5T1"
+    }
+]
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+### Get Single Occupancy
+- Method: GET
+- Endpoint: `${baseUrl}?/:id`
+- Description: Returns a single occupancy for the given Id.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "@odata.etag": "W/\"646129425\"",
+    "_pobl_propertyreferenceid_value": "376c539b-d81a-ec11-b6e7-000d3a87226f",
+    "_transactioncurrencyid_value": "cbb09e0d-1182-ea11-a811-002248003971",
+    "pobl_occupantcontractstartdate": "2022-08-01T00:00:00Z",
+    "pobl_occupancycontractreference": "ACC-2002651/1",
+    "pobl_name": "ACC-2002651/1",
+    "pobl_nextdebitcycledate": "2023-09-30T01:00:00Z",
+    "pobl_contractbalance": -2738.73,
+    "pobl_occupancycontractid": "2ba809bc-e455-ed11-9562-0022481b5dbb",
+    "property.pobl_accommodationtype": "Art Studio",
+    "property.pobl_addressconcat": "Room B, Alexandra Road, Swansea, Swansea, SA1 5AJ",
+    "responsible": [
+        {
+            "@odata.etag": "W/\"539896075\"",
+            "contactid": "4a4d4a63-e355-ed11-9562-0022481b574a",
+            "fullname": "Sales Test09"
+        }
+    ],
+    "additional": []
+}
+```
+
+404 Response
+```json
+{
+    "error": "No occupancy found"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+### Get Transactions
+- Method: GET
+- Endpoint: `${baseUrl}?/:id/transactions`
+- Description: Returns a list of transactions for the selected occupancy.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+[
+    {
+        "period": "Period 01/09/2023 - 30/09/2023",
+        "transactions": [
+            {
+                "periodStart": "01/09/2023",
+                "periodDebitValue": -15,
+                "periodEnd": "30/09/2023",
+                "periodCreditValue": 5.42,
+                "periodId": "49f72eb1-9548-ee11-be6f-0022481b5f13",
+                "closingBal": -2910.16,
+                "createdOn": "30/09/2023",
+                "narrative": "Credit for Admin 15% Back to 19/09/2023",
+                "contractBal": -2910.16,
+                "transactionValue": 5.42,
+                "transactionType": "Credit",
+                "transactionId": "fe826e53-5f5f-ee11-8df0-0022481b5f13"
+            },
+            {
+                "periodStart": "01/09/2023",
+                "periodDebitValue": -15,
+                "periodEnd": "30/09/2023",
+                "periodCreditValue": 5.42,
+                "periodId": "49f72eb1-9548-ee11-be6f-0022481b5f13",
+                "closingBal": -2910.16,
+                "createdOn": "01/09/2023",
+                "narrative": "Monthly Admin 15% 01/09/2023-30/09/2023",
+                "contractBal": -2915.58,
+                "transactionValue": -15,
+                "transactionType": "Debit",
+                "transactionId": "0f746f14-9648-ee11-be6f-0022481b5f13"
+            }
+        ]
+    },
+    ...
+]
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```

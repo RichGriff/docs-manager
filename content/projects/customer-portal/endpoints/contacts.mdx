@@ -1,0 +1,368 @@
+---
+title: Contacts
+description: Available actions to this route.
+---
+
+## Description
+These routes allows authenticated users fetch and update contact details.
+
+## Contents
+
+- [Get Single Contact](#get-single-contact)
+- [Update Single Contact](#update-single-contact)
+- [Get Contact Preferences](#get-contact-preferences)
+- [New Contact Preferences](#new-contact-preference)
+- [Contact Lookups](#contact-lookups)
+- [Contact Preference Lookups](#contact-preference-lookups)
+
+## Base URL
+http://localhost:5000/api/contacts
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### Get Single Contact
+- Method: GET
+- Endpoint: `${baseUrl}/:id`
+- Description: Retrieves contact information for the specified contact Id.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+  ```json
+  {
+    "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#contacts(salutation,firstname,lastname,pobl_contactinitial,pobl_dob,emailaddress1,emailaddress2,address1_telephone1,address1_telephone2,pobl_nationalinsurance,gendercode,pobl_sexualorientation,familystatuscode,pobl_ethnicorigin,pobl_economicstatus,pobl_language,pobl_email1type,pobl_email2type,pobl_telephone1type,pobl_telephone2type)/$entity",
+    "@odata.etag": "W/\"649022036\"",
+    "salutation": "Mr",
+    "firstname": "Portal",
+    "lastname": "Test",
+    "pobl_contactinitial": "PT",
+    "pobl_dob": "2003-03-22T00:00:00Z",
+    "emailaddress1": "example@poblgroup.co.uk",
+    "emailaddress2": "",
+    "address1_telephone1": "+441633111112",
+    "address1_telephone2": null,
+    "pobl_nationalinsurance": "TEST1234567",
+    "gendercode": 1,
+    "pobl_sexualorientation": 771570003,
+    "familystatuscode": 771570002,
+    "pobl_ethnicorigin": null,
+    "pobl_economicstatus": 771570000,
+    "pobl_language": 771570000,
+    "pobl_email1type": 771570000,
+    "pobl_email2type": 771570001,
+    "pobl_telephone1type": 771570000,
+    "pobl_telephone2type": null,
+    "contactid": "22bf5e7a-f1c7-ed11-b597-0022481b5210"
+}
+```
+404 Response
+  ```json
+  {
+    "error": "No Contact Found"
+  }
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+### Update Single Contact
+- Method: PUT
+- Endpoint: `${baseUrl}/:id`
+- Description: Updates contact information for the specified contact Id.
+- Authentication Required: Yes
+
+#### Request
+
+```json
+{
+    "title": "Mr",
+    "contactInitial": "",
+    "dob": "1900-01-01",
+    "tel1": "07911222333",
+    "tel1Type": "771570003",
+    "tel2": "",
+    "tel2Type": "",
+    "email1": "example@poblgroup.co.uk",
+    "email1Type": "771570001",
+    "email2": "",
+    "email2Type": "",
+    "gender": "1",
+    "martialStatus": "771570002",
+    "ethnicOrigin": "771570000",
+    "sexualOrientation": "771570002",
+    "economicStatus": "771570000",
+    "nationalInsurance": "JN345345",
+    "language": "771570000"
+}
+```
+
+<i>Please note the option values in the above request come from Dynamics and are loaded into the form from <a href="#contact-lookups">Lookups</a></i>
+
+#### Responses
+200 Response
+```json
+{
+    "updated": true,
+    "message": "Successfully updated contact!"
+}
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+
+
+### Get Contact Preferences
+- Method: GET
+- Endpoint: `${baseUrl}/preferences/:id`
+- Description: Retrieves contact preferences for the provided contact Id.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#contacts(pobl_contactpreferenceemail,pobl_contactpreferencephone,pobl_contactpreferencepostal,pobl_contactpreferencesms,pobl_contactpreferencesurvey,preferredcontactmethodcode)/$entity",
+    "@odata.etag": "W/\"649036343\"",
+    "pobl_contactpreferenceemail": "Opt In",
+    "pobl_contactpreferencephone": "Opt In",
+    "pobl_contactpreferencepostal": "Opt In",
+    "pobl_contactpreferencesms": "Opt In",
+    "pobl_contactpreferencesurvey": "Opt In",
+    "preferredcontactmethodcode": 2,
+    "contactid": "22bf5e7a-f1c7-ed11-b597-0022481b5210"
+}
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+### New Contact Preference 
+- Method: POST
+- Endpoint: `${baseUrl}/preferences/:id`
+- Description: Creates contact preferences for the provided contact Id.
+- Authentication Required: Yes
+
+#### Request
+
+```json
+{
+    "channels":[3,1,2,4,5],
+    "effectiveDate":"2023-11-06T00:00:00.000Z",
+    "preference":"771570001"
+}
+```
+#### Responses
+201 Response
+```json
+{
+    "data": {
+        "id": "22bf5e7a-f1c7-ed11-b597-0022481b5210",
+        "channels": [3,1,2,4,5],
+        "preference": "771570001",
+        "effectiveDate": "2023-11-06T00:00:00.000Z"
+    },
+    "message": "New Preference Added!"
+}
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+### Contact Lookups
+- Method: GET
+- Endpoint: `${baseUrl}/lookups`
+- Description: Retrieves a list of lookups for the contact form.
+- Authentication Required: No
+
+#### Responses
+200 Response
+```json
+{
+    "gender": [
+        { "value": 1, "label": "Male" },
+        { "value": 2, "label": "Female" }
+    ],
+    "sexualOrientation": [
+        { "value": 771570000, "label": "Bi" },
+        { "value": 771570001, "label": "Gay/Lesbian" },
+        { "value": 771570002, "label": "Heterosexual" },
+        { "value": 771570003, "label": "Prefer not to say" },
+        { "value": 771570004, "label": "Prefer to self-describe" }
+    ],
+    "martialStatus": [
+        { "value": 1, "label": "Single" },
+        { "value": 2, "label": "Married or Civil Partnership" },
+        { "value": 3, "label": "Divorced" },
+        { "value": 4, "label": "Widowed" },
+        { "value": 771570001, "label": "Separated" },
+        { "value": 771570002, "label": "Living together in long term partnership" },
+        { "value": 771570003, "label": "Prefer not to Say" }
+    ],
+    "ethnicOrigin": [
+        { "value": 771570000, "label": "White - English/Welsh/Scottish/Northern Ireland/British" },
+        { "value": 771570001, "label": "White - Irish" },
+        { "value": 771570002, "label": "White - Gypsy or Irish Traveller" },
+        { "value": 771570003, "label": "White - Any other white background" },
+        { "value": 771570004, "label": "Mixed - White and Black Caribbean" },
+        { "value": 771570005, "label": "Mixed - White and Black African" },
+        { "value": 771570006, "label": "Mixed - White and Asian" },
+        { "value": 771570007, "label": "Mixed - Any other Mixed/multiple ethnic background" },
+        { "value": 771570008, "label": "Asian/British Asian - Indian" },
+        { "value": 771570009, "label": "Asian/British Asian - Pakistani" },
+        { "value": 771570010, "label": "Asian/British Asian - Bangladeshi" },
+        { "value": 771570011, "label": "Asian/British Asian - Chinese" },
+        { "value": 771570012, "label": "Asian/British Asian - Any other Asian background" },
+        { "value": 771570013, "label": "Black/African/Caribbean/Black British - African" },
+        { "value": 771570014, "label": "Black/African/Caribbean/Black British - Caribbean" },
+        { "value": 771570015, "label": "Black/African/Caribbean/Black British - \"Any other Black/African/CB " },
+        { "value": 771570016, "label": "Other Ethnic Group - Arab" },
+        { "value": 771570017, "label": "Other Ethnic Group - Any other ethnic group" },
+        { "value": 771570018, "label": "Prefer not to say" }
+    ],
+    "employement": [
+        { "value": 771570000, "label": "Employed" },
+        { "value": 771570001, "label": "Unemployed" },
+        { "value": 771570002, "label": "Retired" },
+        { "value": 771570003, "label": "Not Applicable" }
+    ],
+    "language": [
+        { "value": 771570000, "label": "English" },
+        { "value": 771570001, "label": "Welsh" },
+        { "value": 771570016, "label": "Guajarati" },
+        { "value": 771570048, "label": "Urdu" },
+        { "value": 771570017, "label": "Hebrew" },
+        { "value": 771570049, "label": "Vietnamese" },
+        { "value": 771570018, "label": "Hinidi" },
+        { "value": 771570050, "label": "Yiddish" },
+        { "value": 771570019, "label": "Hungarian" },
+        { "value": 771570051, "label": "Other" },
+        { "value": 771570020, "label": "Italian" },
+        { "value": 771570021, "label": "Japanese" },
+        { "value": 771570022, "label": "Korean" },
+        { "value": 771570023, "label": "Kurdish" },
+        { "value": 771570024, "label": "Latvian" },
+        { "value": 771570025, "label": "Lithuanian" },
+        { "value": 771570026, "label": "Ingala" },
+        { "value": 771570027, "label": "Malaylam" },
+        { "value": 771570028, "label": "Mandarin" },
+        { "value": 771570029, "label": "Nepali" },
+        { "value": 771570030, "label": "Pashto" },
+        { "value": 771570031, "label": "Polish" },
+        { "value": 771570032, "label": "Portuguese" },
+        { "value": 771570033, "label": "Potwari" },
+        { "value": 771570002, "label": "Albanian" },
+        { "value": 771570034, "label": "Punjabi (Gurmukhi)" },
+        { "value": 771570003, "label": "Amharic" },
+        { "value": 771570035, "label": "Romanian" },
+        { "value": 771570004, "label": "Arabic" },
+        { "value": 771570036, "label": "Russian" },
+        { "value": 771570005, "label": "Armenian" },
+        { "value": 771570037, "label": "Slovak" },
+        { "value": 771570006, "label": "Bengali" },
+        { "value": 771570038, "label": "Slovenian" },
+        { "value": 771570007, "label": "Bosnian" },
+        { "value": 771570039, "label": "Somali" },
+        { "value": 771570008, "label": "Bulgarian" },
+        { "value": 771570040, "label": "Spanish" },
+        { "value": 771570009, "label": "Burmese" },
+        { "value": 771570041, "label": "Swahili" },
+        { "value": 771570010, "label": "Cantonese" },
+        { "value": 771570042, "label": "Tagalog" },
+        { "value": 771570011, "label": "Czech" },
+        { "value": 771570043, "label": "Tamil" },
+        { "value": 771570012, "label": "Farsi" },
+        { "value": 771570044, "label": "Thai" },
+        { "value": 771570013, "label": "French" },
+        { "value": 771570045, "label": "Tigrinya" },
+        { "value": 771570014, "label": "German" },
+        { "value": 771570046, "label": "Turkish" },
+        { "value": 771570015, "label": "Greek" },
+        { "value": 771570047, "label": "Ukrainian" }
+    ],
+    "emailTypes": [
+        { "value": 771570002, "label": "Next of Kin" },
+        { "value": 771570000, "label": "Personal" },
+        { "value": 771570001, "label": "Work" },
+        { "value": 771570003, "label": "Other" }
+    ],
+    "telTypes": [
+        { "value": 771570000, "label": "Landline" },
+        { "value": 771570001, "label": "Mobile" },
+        { "value": 771570002, "label": "Business" },
+        { "value": 771570003, "label": "Work" },
+        { "value": 771570004, "label": "Fax" },
+        { "value": 771570005, "label": "Other" }
+    ]
+}
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+### Contact Preference Lookups
+- Method: GET
+- Endpoint: `${baseUrl}/lookups`
+- Description: Retrieves a list of lookups for the contact form.
+- Authentication Required: No
+
+#### Responses
+200 Response
+```json
+{
+    "preferredMethods": [
+        { "value": 3, "label": "Phone" },
+        { "value": 1, "label": "SMS" },
+        { "value": 2, "label": "Digital" },
+        { "value": 5, "label": "Postal" },
+        { "value": 4, "label": "Survey" }
+    ],
+    "channels": [
+        { "value": 3, "label": "Phone" },
+        { "value": 1, "label": "SMS" },
+        { "value": 2, "label": "Digital" },
+        { "value": 4, "label": "Survey" },
+        { "value": 5, "label": "Postal" }
+    ],
+    "preferences": [
+        { "value": 771570000, "label": "Not Known" },
+        { "value": 771570001, "label": "Opt In" },
+        { "value": 771570002, "label": "Opt Out" }
+    ]
+}
+```
+
+500 Response
+  ```json
+  {
+    "error": "Something went wrong"
+  }
+```
+
+

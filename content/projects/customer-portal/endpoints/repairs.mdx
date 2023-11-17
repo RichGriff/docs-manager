@@ -1,0 +1,511 @@
+---
+title: Repairs
+description: Available actions to this route.
+---
+
+## Description
+These routes allows authenticated users report repair requests.
+
+## Contents
+
+- [Get Repair Jobs](#get-repair-jobs)
+- [Get Repair Cases](#get-repair-cases)
+- [Create Repair Cases](#create-repair-case)
+- [Create Repair Job](#create-repair-job)
+- [Get Repair Lookups](#get-repair-lookups)
+- [Get Templates](#get-template)
+- [Get Templates Jobs](#get-template-jobs)
+- [Get Appointents](#get-appointents)
+- [Book Appointent](#book-appointent)
+- [Additional Information](#additional-information)
+    - [Creating Repair Process](#creating-repair-process)
+    - [ Processing a Service Connect Job](#processing-a-service-connect-job)
+
+## Base URL
+http://localhost:5000/api/repairs
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### Get Repair Jobs
+- Method: GET
+- Endpoint: `${baseUrl}`
+- Description: Retrieve a list of all repair jobs for the current account.
+- Authentication Required: Yes
+
+> **Deprecated:** This feature/function/content is deprecated and should no longer be used. It may be removed in future versions.
+
+### Get Repair Cases
+- Method: GET
+- Endpoint: `${baseUrl}/case?id={accountId}`
+- Description: Retrieve a list of all repair cases for the account Id provided.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+[
+    {
+        "@odata.etag": "W/\"646333683\"",
+        "pobl_name": "MC-10097588",
+        "pobl_maintcaseid": "c497569a-bf78-ee11-8179-0022481b5210",
+        "job.description": "sadad",
+        "job.ordernumber": "MJ-10113034",
+        "job.createdon": "2023-11-01T14:04:43Z"
+    }
+]
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Create Repair Case
+- Method: POST
+- Endpoint: `${baseUrl}/case`
+- Description: Create a new maintenance case.
+- Authentication Required: Yes
+
+#### Requests
+```json
+{
+    "accountId":"af984368-e355-ed11-9562-0022481b5dc1",
+    "occupancyId":"2ba809bc-e455-ed11-9562-0022481b5dbb"
+}
+```
+
+#### Responses
+201 Response
+```json
+{
+    "created": true,
+    "maintCaseId": "207c78c9-287e-ee11-8179-0022481b5210"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong",
+}
+```
+
+### Create Repair Job
+- Method: POST
+- Endpoint: `${baseUrl}`
+- Description: Create a new maintenance job (SalesOrder).
+- Authentication Required: Yes
+
+#### Requests
+```json
+{
+    "caseId":"207c78c9-287e-ee11-8179-0022481b5210",
+    "templateId":"a205a2fe-0b8f-ec11-b400-0022481aa8e3",
+    "additionalDetails":"testing",
+    "accessDetails":""
+}
+```
+
+#### Responses
+201 Response
+```json
+{
+    "jobCreated": true,
+    "maintJobId": "471dbcc6-287e-ee11-8179-0022481b5f13"
+}
+```
+
+400 Response
+```json
+{
+    "error": "Could not create maintenance job.",
+}
+```
+
+500 Response
+```json
+{
+    "error": "We could not send the job to our supplier, please get in touch with us to complete.",
+}
+```
+```json
+{
+    "error": "Something went wrong.",
+}
+```
+
+
+### Get Repair Lookups
+- Method: GET
+- Endpoint: `${baseUrl}/lookups`
+- Description: Retrieve a list of all lookups for the repair forms.
+- Authentication Required: Yes
+
+#### Responses
+
+200 Response
+```json
+{
+    "locations": [
+        { "value": 771570000, "label": "Front Entrance" },
+        { "value": 771570001, "label": "Rear Entrance" },
+        { "value": 771570002, "label": "Kitchen" },
+        { "value": 771570003, "label": "Living Room" },
+        { "value": 771570004, "label": "Bathroom" },
+        { "value": 771570005, "label": "Bedroom" },
+        { "value": 771570006, "label": "Hallway" },
+        { "value": 771570007, "label": "Communal Area" },
+        { "value": 771570008, "label": "External" },
+        { "value": 771570009, "label": "Garden" },
+        { "value": 771570010, "label": "Downstairs WC" },
+        { "value": 771570011, "label": "Airing Cupboard" },
+        { "value": 771570012, "label": "Ground Floor" },
+        { "value": 771570013, "label": "Landing" }
+    ],
+    "locationItems": [
+        { "value": 771570000, "label": "Door Handle" },
+        { "value": 771570001, "label": "Door Frame" },
+        { "value": 771570002, "label": "Washing Machine" },
+        { "value": 771570003, "label": "Carpet" },
+        { "value": 771570004, "label": "Tap" },
+        { "value": 771570005, "label": "Bed" },
+        { "value": 771570006, "label": "Wall" },
+        { "value": 771570007, "label": "Stairs" },
+        { "value": 771570008, "label": "Seal" },
+        { "value": 771570009, "label": "Window" },
+        { "value": 771570010, "label": "Door" },
+        { "value": 771570011, "label": "Gutter" },
+        { "value": 771570012, "label": "Drawer Front" },
+        { "value": 771570013, "label": "Cupboard Door" },
+        { "value": 771570014, "label": "Gate" },
+        { "value": 771570015, "label": "Toilet Flush" },
+        { "value": 771570016, "label": "Window Handle" },
+        { "value": 771570017, "label": "Plug Socket" },
+        { "value": 771570018, "label": "Fencing" },
+        { "value": 771570019, "label": "Drainage" },
+        { "value": 771570020, "label": "Boiler" },
+        { "value": 771570021, "label": "Extractor Fan" },
+        { "value": 771570022, "label": "Shower" },
+        { "value": 771570023, "label": "Smoke Alarm" }
+    ]
+}
+```
+
+### Get Templates
+- Method: GET
+- Endpoint: `${baseUrl}/templates?location={location}&item={item}`
+- Description: Return a list of available templates matching the problem item.
+- Authentication Required: Yes
+
+#### Requests
+- Location example: `location=kitchen` 
+- Item example: `item=tap` 
+
+#### Responses 
+
+200 Response
+```json
+[
+    {
+        "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#pobl_mainttemplatecases/$entity",
+        "@odata.etag": "W/\"580409177\"",
+        "_pobl_costcentreid_value": "359a4be0-d530-ec11-b6e6-000d3a871599",
+        "pobl_maintcasetemplateportaldescription": "Default repair type used via the portal to allow the user to request a repair when no other options fit their issue. ",
+        "_pobl_vatcodeid_value": "e5cb26bd-401d-ec11-b6e7-000d3a87226f",
+        "statuscode": 1,
+        "pobl_mainttemplatecaseid": "a205a2fe-0b8f-ec11-b400-0022481aa8e3",
+        "createdon": "2022-02-16T09:37:07Z",
+        "statecode": 0,
+        "pobl_maintcasetemplatestarteddate": "2022-02-16T00:00:00Z",
+        "modifiedon": "2023-05-09T14:57:31Z",
+        "_pobl_activitycodeid_value": "6fbb87fd-a110-ec11-b6e6-00224800f2c3",
+        "versionnumber": 580409177,
+        "pobl_maintcasetemplatename": "Default Portal Template",
+        "pobl_maintcasetemplateshowonportal": true,
+        "timezoneruleversionnumber": 0,
+        "pobl_priority": 771570000,
+        "_modifiedby_value": "da135e7a-8ee4-eb11-bacb-0022481a7e04",
+        "pobl_maintcasetemplaterecharge": false,
+        "pobl_maintcasetemplateservicecharged": false,
+        "pobl_maintcasetemplateref": "DFP-Request",
+        "_createdby_value": "da135e7a-8ee4-eb11-bacb-0022481a7e04",
+        "_organizationid_value": "d15ca0bf-e294-4984-b476-f52bf745d850",
+        "utcconversiontimezonecode": 85,
+        "_pobl_worktypeid_value": "f89f6d03-d430-ec11-b6e6-000d3a871599",
+        "pobl_name": "Default Portal Template",
+        "_pobl_contractid_value": "42973a90-3f9e-ec11-b400-000d3a873550",
+        "pobl_jobelement7qty": null,
+        "pobl_jobelement4qty": null,
+        "_pobl_jobelement4id_value": null,
+        "pobl_problemitem": null,
+        "pobl_jobelement3qty": null,
+        "_pobl_jobelement1id_value": null,
+        "pobl_locationinhome": null,
+        "_pobl_jobelement5id_value": null,
+        "pobl_description": null,
+        "_pobl_jobelement3id_value": null,
+        "_pobl_jobelement8id_value": null,
+        "_modifiedonbehalfby_value": null,
+        "_pobl_jobelement9id_value": null,
+        "pobl_jobelement9qty": null,
+        "pobl_jobelement10qty": null,
+        "pobl_jobelement8qty": null,
+        "overriddencreatedon": null,
+        "pobl_jobelement2qty": null,
+        "_pobl_jobelement2id_value": null,
+        "pobl_jobelement6qty": null,
+        "_pobl_jobelement10id_value": null,
+        "importsequencenumber": null,
+        "pobl_jobelement1qty": null,
+        "_pobl_jobelement7id_value": null,
+        "_pobl_jobelement6id_value": null,
+        "_createdonbehalfby_value": null,
+        "pobl_jobelement5qty": null,
+        "_pobl_slaid_value": null,
+        "selected": false
+    }
+]
+```
+
+500 Response
+```json
+{
+    error: 'Something went wrong'
+}
+```
+
+### Get Template Jobs
+> **Deprecated:** This feature/function/content is deprecated and should no longer be used. It may be removed in future versions.
+
+- Method: GET
+- Endpoint: `${baseUrl}/templates/jobs/:id`
+- Description: Return a list of jobs linked to the selected template.
+- Authentication Required: Yes
+
+#### Responses 
+
+200 Response
+```json
+
+```
+
+500 Response
+```json
+{
+    error: 'Something went wrong'
+}
+```
+
+### Get Appointents
+- Method: GET
+- Endpoint: `${baseUrl}/appointments?id={jobId}`
+- Description: Retrieve a list of all appointments for the created job.
+- Authentication Required: Yes
+
+#### Responses
+
+200 Response
+```json
+{
+    "jobRef": "MJ-10113042",
+    "availability": [
+        {
+            "planningWindowId": 4,
+            "date": "2023-11-08T11:07:00",
+            "status": 2,
+            "name": "ALL DAY",
+            "start": "08:00",
+            "end": "16:29"
+        },
+        {
+            "planningWindowId": 5,
+            "date": "2023-11-08T11:07:00",
+            "status": 1,
+            "name": "MORNING",
+            "start": "08:00",
+            "end": "12:59"
+        },
+        {
+            "planningWindowId": 6,
+            "date": "2023-11-08T11:07:00",
+            "status": 1,
+            "name": "AFTERNOON",
+            "start": "13:00",
+            "end": "16:59"
+        },
+        {
+            "planningWindowId": 7,
+            "date": "2023-11-08T11:07:00",
+            "status": 1,
+            "name": "SCHOOL RUN",
+            "start": "09:30",
+            "end": "14:29"
+        }
+    ]
+}
+```
+
+500 Response
+```json
+{
+    error: 'Something went wrong'
+}
+```
+
+### Book an Appointment
+- Method: POST
+- Endpoint: `${baseUrl}/appointments`
+- Description: Book a repair appointment.
+- Authentication Required: Yes
+
+#### Responses
+
+201 Response
+```json
+{
+    "message": "Appointment Created",
+    "bookingSubmission": {
+        "jobId": "5d7567eb-277e-ee11-8179-0022481b5210",
+        "ref": "MJ-10113043",
+        "date": "November 8th, 2023",
+        "slot": "08:00-16:29"
+    }
+}
+```
+
+400 Response
+```json
+{
+    error: 'We couldnt book the appointment'
+}
+```
+
+500 Response
+```json
+{
+    error: 'Something went wrong'
+}
+```
+
+---
+
+### Additional Information
+
+#### Creating Repair Process
+
+There is a lot of parts to this process, as we are fetching lookups values from various tables in Dynamics as well as calling some power automate workflows. 
+
+Once the request has been picked up at the endpoint we gather the following informaiton and set it to our `newJob` object.
+
+```js
+// Get Maintenance Case
+const maintCase = await GetMaintenanceCase(access_token, caseId)
+newJob.accountId = maintCase._pobl_maintcaseaccountid_value
+newJob.propertyId = maintCase._pobl_maintcasepropertyid_value
+
+// Get Template
+const template = await GetSingleTemplate(access_token, templateId)
+newJob.contractId = template._pobl_contractid_value;
+newJob.vatCodeId = template._pobl_vatcodeid_value;
+newJob.activityCodeId = template._pobl_activitycodeid_value;
+newJob.costCentreId = template._pobl_costcentreid_value;
+newJob.workTypeId = template. _pobl_worktypeid_value;
+
+// Get Project Code
+const projectCode = await GetProjectCode(access_token, newJob.propertyId)
+newJob.projectCodeId = projectCode
+
+// Get Contractor
+const contractor = await GetContractor(access_token, newJob.contractId)
+newJob.supplierId = contractor._pobl_supplier_value;
+newJob.priceListId = contractor._pobl_defaultpricelistid_value;
+cit = contractor.pobl_contractinterfacetype
+
+// Get Template Jobs
+const templateJobsData = await GetTemplateJobs(access_token, templateId)
+// For each template job fetch product to retreive unit of measure value (this is required when setting the product in salesorderdetail)
+const jobPromises = []
+
+for(const job of templateJobsData) {
+    if(job.id) {
+        const promise = GetProduct(access_token, job.id)
+            .then(data => {
+                job.unitofmeasure = data['uomLink.uomid']
+            })
+        jobPromises.push(promise)
+    }
+}
+
+await Promise.all(jobPromises)
+
+newJob.templateJobs = templateJobsData;
+```
+<b>Please note: If any of this data in missing in the template it could throw an error.</b>
+
+Next step is to actually create this `Maintenance Job` in Dynamics. We do this in the following code, we also then update the job with the `Products` associated to this job.
+
+```js
+const created = await CreateMaintenanceJob(access_token, newJob)
+// return res.status(201).json(created)
+if (created) {
+    const { maintJobId } = created
+    // Update Maintenance Job with Job Items
+    newJob.templateJobs.map(async item => {
+        const addProduct = await AddMaintJobItems(access_token, item.id, created.maintJobId, item.qty, item.unitofmeasure);
+    })
+
+    // If Service Connect then issue to Service Connect
+
+    return res.status(201).json({ jobCreated: true, maintJobId })
+} else {
+    return res.status(400).json({ error: 'Could not create maintenance job' })
+}
+```
+
+The above example you see the repsonse sent when the template we are processing is <b>not</b> of type `ServiceConnect`.
+
+#### Processing a Service Connect Job
+
+Service connect is a thrid party tool, used to schedule in work for `Pobl Trades`. This step involes:
+
+- Getting Approval 
+- Sending the Job to Service Connect
+
+These are processed by Power Automate workflows that already exist in Dynamics. We handle these as follows:
+
+```js
+// If Service Connect then issue to Service Connect
+if (cit == 771570002) {
+    // Get & Run Approval Flow
+    const approvalFlow = await GetFlowSettings(access_token, "Request Submission Approval")
+    const { data, error } = await RunFlow(approvalFlow.pobl_attr1, {
+        "TriggeringUser": "edb0e552-f182-ea11-a812-000d3a86acda", // c30d43ae-a0d9-eb11-bacb-00224800ffe8
+        "JobId": created.maintJobId,
+        "BackgroundProcess": false
+    })
+
+    if(data.AutoApproved && data.RealtimeBooking) {
+        console.log(`Auto Approved`)
+        // Send Job to Service Connect
+        const serviceConnectflow = await GetFlowSettings(access_token, "'ServiceConnect' Create Job")
+        console.log(`Start flow run for ${serviceConnectflow}`)
+        let { data, error } = await RunFlow(serviceConnectflow.pobl_attr1, { "JobId": created.maintJobId })
+        
+        if(error)
+            return res.status(500).json({ error: 'We could not send the job to our supplier, please get in touch with us to complete.' })
+
+        if(data) {
+            console.log('Service Connect Job Created')
+            return res.status(201).json({ maintJobId, cit:'ServiceConnect' })
+        }
+    }
+}
+```

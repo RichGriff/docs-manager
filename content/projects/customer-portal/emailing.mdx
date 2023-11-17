@@ -1,0 +1,116 @@
+---
+title: Emailing
+description: Sending emails with nodemailer.
+---
+
+In order to allow emails to be sent to Customers and Pobl Staff we have implemented <b>Nodemailer</b> to handle this communication. This document will explain the configuration. 
+
+<br/><img src="https://nodemailer.com/nm_logo_200x136.png" /><br/>
+## What is Nodemailer?
+Nodemailer is a popular module in the Node.js ecosystem that allows applications to send emails. It simplifies the process of sending email messages by providing a straightforward and easy-to-use interface. With Nodemailer, developers can easily integrate email functionality into their applications, whether for sending notifications, alerts, or any other type of email communication. 
+
+It supports various email transfer protocols, including SMTP, SMTPs, and sendmail, making it versatile for different email service providers. Nodemailer also provides features such as attachment support, HTML content, and the ability to send bulk emails, making it a comprehensive solution for email communication within Node.js applications. Its extensive documentation and active community support make it a reliable choice for developers looking to implement email functionality in their Node.js projects.
+
+## Configuration
+
+In order to configure nodemailer we need to provide a `transporter` this defines what mail account we want to use. In our case we are using Microsoft Outlook, see [Nodemailer Docs](https://nodemailer.com/) for other options.
+
+### Nodemailer Config
+
+```js
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { POBL_SENDER_EMAIL, POBL_SENDER_EMAIL_PASS } = process.env
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.office365.com', // Office 365 SMTP server
+    port: 587, // Port for secure SMTP
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: POBL_SENDER_EMAIL, // Your Office 365 email address
+        pass: POBL_SENDER_EMAIL_PASS, // Your Office 365 email password
+    },
+});
+
+const mailOptions = {
+    from: POBL_SENDER_EMAIL,
+};
+
+
+module.exports = {
+    transporter,
+    mailOptions
+}
+```
+
+### Sending an Email
+
+In order to send emails from the forms on the frontend, we have created an endpoint in our api to handle the sending of emails. 
+
+`http://localhost:5000/api/emails`
+
+```js
+router.route('/').post(async (req, res) => {
+    // Receive form specific information
+    const { html, subject, recipient } = req.body
+
+    try {
+        await transporter.sendMail({
+            ...mailOptions,
+            to: recipient,
+            subject,
+            html
+        })
+
+        return res.status(200).json({ success: true })
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({ error: error.message })
+    }
+})
+```
+
+#### Request Body
+When making request to this endpoint, we need to provide the following:
+
+- html - this the contents of the email provide as a `string`.
+- subject - subject for the email
+- recipient - email address for the account to receive the email
+
+#### Frontend Example
+
+Below is an example of how we create the html content based on an email template.
+
+```js
+try {
+    let formData = {
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        address: data.address,
+        telephone: data.telephone,
+        dob: data.dateOfBirth,
+        message: data.message,
+    };
+
+    const response = await axios.post('/api/recaptcha', { recaptcha });
+
+    if (response.data.response.success) {
+        /* 
+        The ContactEmail here is our template
+        We are using ReactDOMServer to insert our formData into this template
+        The output is rendered as a string
+        */
+        const htmlString = ReactDOMServer.renderToString(<ContactEmail data={formData} />);
+        SendEmail('New Contact Form Submission', htmlString, 'example@poblgroup.co.uk').then(({ success }) => {
+            success ? console.log(success) : null;
+            messageController(false, locale);
+            reset();
+        });
+    }
+} catch (error) {
+    console.log(error);
+    messageController(true, locale);
+}
+```

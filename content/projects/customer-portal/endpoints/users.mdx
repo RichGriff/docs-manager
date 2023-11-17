@@ -1,0 +1,262 @@
+---
+title: Users
+description: Available actions to this route.
+---
+
+
+## Description
+These routes allows authenticated users fetch and update contact details.
+
+## Contents
+
+- [User Login](#user-login)
+- [Get Users](#get-users)
+- [Create User](#create-user)
+- [Get Single User](#get-single-user)
+- [Update User](#update-user)
+- [Get User Details](#get-user-details)
+- [Additional Information](#additional-information)
+    - [Contact Key Fields](#contact-key-fields)
+
+## Base URL
+http://localhost:5000/api/users
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### User Login
+- Method: POST
+- Endpoint: `${baseUrl}/login`
+- Description: Used for allowing the user to login.
+- Authentication Required: Yes
+
+#### Request
+```json
+{
+    "email": "example@poblgroup.co.uk",
+    "password": "Welcome123!"
+}
+```
+
+#### Responses
+200 Response
+```json
+{
+    "data": {
+        "id": "cdd36830-b65b-ee11-8def-0022481b574a",
+        "username": null,
+        "email": "example@poblgroup.co.uk",
+        "fullname": "Portal Test",
+        "contactId": "00000000-0000-0000-0000-000000000000",
+        "accountId": "00000000-0000-0000-0000-000000000000",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkZDM2ODMwLWI2NWItZWUxMS04ZGVmLTAwMjI0ODFiNTc0YSIsImlhdCI6MTY5OTM1NDAzNywiZXhwIjoxNjk5OTU4ODM3fQ.bnQ0-cIoNgezDhq8QZBqrc-7tIFBc8rjbAk_h05SmW4"
+    }
+}
+```
+
+400 Response
+When a user hasnt verified their email that they registered with.
+```json
+{
+    error: "Please verifiy your email"
+}
+```
+
+401 Response
+When the incorrect login details have been passed.
+```json
+{
+    error: "Incorrect login details"
+}
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Get Users
+- Method: GET
+- Endpoint: `${baseUrl}`
+- Description: Retrieves a list of all users.
+- Authentication Required: Yes
+#### Responses
+200 Response
+```json
+{
+    "data": [
+        {
+            "@odata.etag": "W/\"642224598\"",
+            "pobl_portaluserid": "ad0f0eb4-cc74-ee11-8179-0022481b517a",
+            "pobl_name": "Test Customer",
+            "pobl_email": "noemail@poblgroup.co.uk",
+            "pobl_username": null,
+            "pobl_password": null
+        },
+        {
+            "@odata.etag": "W/\"642224602\"",
+            "pobl_portaluserid": "af0f0eb4-cc74-ee11-8179-0022481b517a",
+            "pobl_name": "John Doe",
+            "pobl_email": "noemail@poblgroup.co.uk",
+            "pobl_username": null,
+            "pobl_password": null
+        }
+    ]
+}
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Create User
+- Method: POST
+- Endpoint: `${baseUrl}`
+- Description: Creates a new user. This is used by the registration proccess.
+- Authentication Required: Yes
+
+#### Request
+```json
+{
+    "firstname": "Richard",
+    "lastname": "Griffiths",
+    "email": "rich.griffiths12@poblgroup.co.uk",
+    "username": "rich.pobl",
+    "password": "123456",
+    "dob": "1989-02-19",
+    "nationalInsurance": "JN345345"
+}
+```
+
+201 Response
+```json
+{ 
+    message: 'User Added!' 
+}
+```
+
+400 Response
+When a user has already been created with the provided email address.
+```json
+{
+    error: "User already exists with this email address"
+}
+```
+
+When the email address used isn't unique. 
+```json
+{
+    error: "Too many contacts found with the same details. Please get in touch."
+}
+```
+
+404 Response
+When we couldn't find a matching contact on the <a href='#contact-key-fields'>key fields</a>.
+```json
+{
+    error: "No contact found matching your details. Please get in touch."
+}
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Get Single User
+- Method: GET
+- Endpoint: `${baseUrl}/:id`
+- Description: Returns a single user record.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#pobl_portalusers(pobl_portaluserid,pobl_name,pobl_email,pobl_username,pobl_password,pobl_verified,pobl_verifytoken)/$entity",
+    "@odata.etag": "W/\"645638597\"",
+    "pobl_portaluserid": "cdd36830-b65b-ee11-8def-0022481b574a",
+    "pobl_name": "Portal Test",
+    "pobl_email": "example@poblgroup.co.uk",
+    "pobl_username": null,
+    "pobl_password": "$2a$10$zA5T9CbYOqPQA2iS086jweVzxX3tjGs783YsljhrmtOv3K9e04r/u",
+    "pobl_verified": true,
+    "pobl_verifytoken": null
+}
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Update User
+- Method: PUT
+- Endpoint: `${baseUrl}/:id`
+- Description: Updates the user record.
+- Authentication Required: Yes
+
+> **Usage** -  This is currently only used on the Profile page to update the users password, once they have logged in.
+
+#### Request
+```json
+{
+    "password": "Welcome123!"
+}
+```
+
+#### Responses
+200 Response
+```json
+{
+    "message": "Password Updated"
+}
+```
+
+
+### Get User Details
+- Method: GET
+- Endpoint: `${baseUrl}/:id/details`
+- Description: Returns user details for the user Id provided.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "name": "Portal Test",
+    "email": "example@poblgroup.co.uk",
+    "currentOccupier": true
+}
+```
+
+500 Response
+```json
+{
+    error: "Something went wrong"
+}
+```
+
+### Additional Information
+
+#### Contact Key Fields
+| Field    | Description |
+| -------- | ------- |
+| First Name  | Matches the customers Forename field in CRM    |
+| Last Name | Matches the customers Surname field in CRM     |
+| Dat of Birth    | Matches the customers Date of Birth field in CRM    |
+| National Insurance Number    | Matches the customers NI field in CRM    |

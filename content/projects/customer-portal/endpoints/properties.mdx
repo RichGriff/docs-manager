@@ -1,0 +1,125 @@
+---
+title: Properties
+description: Available actions to this route.
+---
+
+## Description
+These routes allows authenticated users fetch property details.
+## Contents
+
+- [Get Properties](#get-properties)
+- [Get Single Property](#get-single-property)
+- [Get Property Compliance](#get-property-compliance)
+
+## Base URL
+http://localhost:5000/api/properties
+
+
+## Authentication
+All endpoints require authentication via a JWT token. See <a href='../authentication.md'>Authentication</a> for details.
+
+---
+
+## Endpoints
+
+### Get Properties
+> **Deprecated:** This feature/function/content is deprecated and should no longer be used. It may be removed in future versions.
+
+### Get Single Property
+- Method: GET
+- Endpoint: `${baseUrl}?/:id`
+- Description: Returns a single property.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#pobl_properties(pobl_addressconcat,pobl_buildingtype,pobl_propertytype,pobl_tenuretype,pobl_accommodationtype,pobl_propertyid,pobl_riskasbestos,pobl_lastasbestosinspection,pobl_asbestosconfirmed,pobl_riskfirechoice,pobl_lastfireinspection,pobl_nextfireinspection,pobl_riskelectrical,pobl_lastelectricaltest,pobl_nextelectricaltest,pobl_riskgas,pobl_lastgascertificate,pobl_nextgascertificate,pobl_risklegionellachoice,pobl_lastlegionellatest,pobl_nextlegionellatest)/$entity",
+    "@odata.etag": "W/\"631567160\"",
+    "pobl_addressconcat": "Room B, Alexandra Road, Swansea, Swansea, SA1 5AJ",
+    "pobl_buildingtype": "Requires Updating",
+    "pobl_propertytype": "Student",
+    "pobl_tenuretype": "Requires Updating",
+    "pobl_accommodationtype": "Art Studio",
+    "pobl_propertyid": "376c539b-d81a-ec11-b6e7-000d3a87226f",
+    "pobl_riskasbestos": "Unknown",
+    "pobl_lastasbestosinspection": null,
+    "pobl_asbestosconfirmed": false,
+    "pobl_riskfirechoice": null,
+    "pobl_lastfireinspection": null,
+    "pobl_nextfireinspection": null,
+    "pobl_riskelectrical": false,
+    "pobl_lastelectricaltest": null,
+    "pobl_nextelectricaltest": null,
+    "pobl_riskgas": false,
+    "pobl_lastgascertificate": null,
+    "pobl_nextgascertificate": null,
+    "pobl_risklegionellachoice": null,
+    "pobl_lastlegionellatest": null,
+    "pobl_nextlegionellatest": null,
+    "_organizationid_value": "d15ca0bf-e294-4984-b476-f52bf745d850",
+    "hazards": [],
+    "certificates": []
+}
+```
+
+404 Response
+```json
+{
+    "error": "No Property Found"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
+
+### Get Property Compliance
+- Method: GET
+- Endpoint: `${baseUrl}?/:id/compliance`
+- Description: Returns compliance data for a given property.
+- Authentication Required: Yes
+
+#### Responses
+200 Response
+```json
+{
+    "@odata.context": "https://pobltest.api.crm11.dynamics.com/api/data/v9.2/$metadata#pobl_properties(pobl_propertyid,pobl_riskasbestos,pobl_lastasbestosinspection,pobl_asbestosconfirmed,pobl_riskfirechoice,pobl_lastfireinspection,pobl_nextfireinspection,pobl_riskelectrical,pobl_lastelectricaltest,pobl_nextelectricaltest,pobl_riskgas,pobl_lastgascertificate,pobl_nextgascertificate,pobl_risklegionellachoice,pobl_lastlegionellatest,pobl_nextlegionellatest)/$entity",
+    "@odata.etag": "W/\"631567160\"",
+    "pobl_propertyid": "376c539b-d81a-ec11-b6e7-000d3a87226f",
+    "pobl_riskasbestos": "Unknown",
+    "pobl_lastasbestosinspection": null,
+    "pobl_asbestosconfirmed": false,
+    "pobl_riskfirechoice": null,
+    "pobl_lastfireinspection": null,
+    "pobl_nextfireinspection": null,
+    "pobl_riskelectrical": false,
+    "pobl_lastelectricaltest": null,
+    "pobl_nextelectricaltest": null,
+    "pobl_riskgas": false,
+    "pobl_lastgascertificate": null,
+    "pobl_nextgascertificate": null,
+    "pobl_risklegionellachoice": null,
+    "pobl_lastlegionellatest": null,
+    "pobl_nextlegionellatest": null,
+    "_organizationid_value": "d15ca0bf-e294-4984-b476-f52bf745d850"
+}
+```
+
+404 Response
+```json
+{
+    "error": "No Compliance Information Found"
+}
+```
+
+500 Response
+```json
+{
+    "error": "Something went wrong"
+}
+```
